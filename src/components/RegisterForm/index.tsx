@@ -27,7 +27,7 @@ function RegisterForm({ onReturn }: Props) {
     console.log("payload", payload);
     try {
       const response = await axios.post<LoginResponse>(
-        "https://backend-rewear-production.up.railway.app/register",
+        "https://backend-UN Bet-production.up.railway.app/register",
         payload
       );
 
@@ -86,18 +86,6 @@ function RegisterForm({ onReturn }: Props) {
         </div>
 
         <div className="my-2">
-          <label htmlFor="phoneSlot" className="form-label"></label>
-          <input
-            required
-            name="phone"
-            type="phone"
-            className={`form-control ${styles.loginSlot}`}
-            id="phoneSlotRegister"
-            placeholder="Numero de telefono"
-          />
-        </div>
-
-        <div className="my-2">
           <label htmlFor="userSlot" className="form-label"></label>
           <input
             required
@@ -106,6 +94,30 @@ function RegisterForm({ onReturn }: Props) {
             className={`form-control ${styles.loginSlot}`}
             id="userSlotRegister"
             placeholder="Nombre de usuario"
+          />
+        </div>
+
+        <div className="my-2">
+          <label htmlFor="passwordSlot" className="form-label"></label>
+          <input
+            required
+            name="password"
+            type="password"
+            className={`form-control ${styles.loginSlot}`}
+            id="passwordSlotRegister"
+            placeholder="Contraseña"
+          />
+        </div>
+
+        <div className="my-2">
+          <label htmlFor="passwordSlotRepeat" className="form-label"></label>
+          <input
+            required
+            name="passwordRepeat"
+            type="password"
+            className={`form-control ${styles.loginSlot}`}
+            id="passwordSlotRepeat"
+            placeholder="Repite Contraseña"
           />
         </div>
 
@@ -122,14 +134,37 @@ function RegisterForm({ onReturn }: Props) {
         </div>
 
         <div className="my-2">
-          <label htmlFor="passwordSlot" className="form-label"></label>
+          <label htmlFor="phoneSlot" className="form-label"></label>
           <input
             required
-            name="password"
-            type="password"
+            name="phone"
+            type="phone"
             className={`form-control ${styles.loginSlot}`}
-            id="passwordSlotRegister"
-            placeholder="Contraseña"
+            id="phoneSlotRegister"
+            placeholder="Numero de telefono"
+          />
+        </div>
+
+        <div className="my-2">
+          <label htmlFor="birthDate" className="form-label"></label>
+          <input
+            required
+            name="phone"
+            type="date"
+            className={`form-control ${styles.loginSlot}`}
+            id="phoneSlotRegister"
+          />
+        </div>
+
+        <div className="my-2">
+          <label htmlFor="birthDate" className="form-label"></label>
+          <input
+            required
+            name="phone"
+            type="number"
+            className={`form-control ${styles.loginSlot}`}
+            id="phoneSlotRegister"
+            placeholder="Cédula de ciudadanía"
           />
         </div>
 
@@ -185,7 +220,7 @@ function RegisterForm({ onReturn }: Props) {
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="exampleModalLabel">
-                Terminos y condiciones de uso - Rewear
+                Terminos y condiciones de uso - UN Bet
               </h1>
               <button
                 type="button"
@@ -199,7 +234,7 @@ function RegisterForm({ onReturn }: Props) {
                 En cumplimiento de la Ley 1581 de 2012 y el Decreto 1377 de 2013
                 de la República de Colombia, y con el objetivo de garantizar la
                 protección de los derechos fundamentales de privacidad,
-                intimidad y buen nombre, ReWear adopta la presente Política de
+                intimidad y buen nombre, UN Bet adopta la presente Política de
                 Tratamiento de Datos Personales, la cual describe los términos y
                 condiciones bajo los cuales realizamos la recolección,
                 almacenamiento, uso, circulación, transferencia y eliminación de
@@ -210,11 +245,11 @@ function RegisterForm({ onReturn }: Props) {
                 <ul>
                   <li>
                     <b>Razón social: </b>
-                    ReWear
+                    UN Bet
                   </li>
                   <li>
                     <b>Correo electrónico: </b>
-                    contactorewear@gmail.com
+                    contactounbet@gmail.com
                   </li>
                 </ul>
 
@@ -252,7 +287,7 @@ function RegisterForm({ onReturn }: Props) {
                 </ul>
                 <li>Finalidades del tratamiento</li>
                 <p>
-                  Los datos personales recolectados por ReWear serán utilizados
+                  Los datos personales recolectados por UN Bet serán utilizados
                   únicamente para los siguientes fines:
                 </p>
                 <ol>
@@ -322,13 +357,13 @@ function RegisterForm({ onReturn }: Props) {
                   <li>
                     <b>Reclamo ante la SIC: </b>Elevar reclamos ante la
                     Superintendencia de Industria y Comercio (SIC) en caso de
-                    incumplimiento de las disposiciones legales por parte de
-                    ReWear.
+                    incumplimiento de las disposiciones legales por parte de UN
+                    Bet.
                   </li>
                 </ol>
                 <li>Principios aplicables al tratamiento</li>
                 <p>
-                  El tratamiento de datos personales por parte de ReWear se
+                  El tratamiento de datos personales por parte de UN Bet se
                   regirá por los siguientes principios:
                 </p>
                 <ol>
@@ -358,7 +393,7 @@ function RegisterForm({ onReturn }: Props) {
                 </ol>
                 <li>Seguridad de la Información</li>
                 <p>
-                  ReWear adopta prácticas robustas para proteger los datos
+                  UN Bet adopta prácticas robustas para proteger los datos
                   personales, incluyendo:
                 </p>
                 <ol>
@@ -382,7 +417,7 @@ function RegisterForm({ onReturn }: Props) {
                 <li>Vigencia</li>
                 <p>
                   Esta política rige a partir de su fecha de publicación y se
-                  mantendrá vigente mientras ReWear lleve a cabo actividades de
+                  mantendrá vigente mientras UN Bet lleve a cabo actividades de
                   tratamiento de datos personales.
                 </p>
               </ol>

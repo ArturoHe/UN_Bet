@@ -1,3 +1,6 @@
-.navColorRewear {
-  background-color: #ebf3ec !important;
+.navColor {
+  background-color: #000000 !important;
+  color: white !important;
+  font-size: 1.2rem !important;
+  height: 5rem;
 }

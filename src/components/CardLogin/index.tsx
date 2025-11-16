@@ -33,23 +33,20 @@ function CardLogin({}: Props) {
     <div className="d-flex col-sm-8 col-md-8 col-lg-12 col-xl-10">
       <div className={`card shadow ${styles.cardLogin}`}>
         <div className="container-fluid px-5 py-3">
-          <img src="/logo.png" className="card-img-top" alt="Logo ReWear" />
+          <img
+            src="/UNBetLogo.svg"
+            className="card-img-top"
+            alt="Logo UN Bet"
+          />
         </div>
         {currentView === "initial" && (
           <div className="card-body" style={{ textAlign: "center" }}>
             <div className="mx-5">
               <div>
                 <Button
-                  text={"Iniciar con cuenta ReWear"}
+                  text={"Iniciar con cuenta UN Bet"}
                   onClick={handleShowLoginForm}
                 />
-              </div>
-              <div className="my-3">
-                <GoogleOAuthProvider clientId="979740667016-qeor1k8041jjuus9fab09fcddmknnkfh.apps.googleusercontent.com">
-                  <div>
-                    <ButtonGoogle />
-                  </div>
-                </GoogleOAuthProvider>
               </div>
               <div className="mt-5 mb-3">
                 <a

@@ -24,7 +24,7 @@ function App() {
     <Router>
       <Routes>
         {/* Ruta pública sin layout */}
-        <Route path="/" element={<LandingPage title="ReWear | Landing" />} />
+        <Route path="/" element={<LandingPage title="UN Bet" />} />
         <Route path="/login" element={<Login title="ReWear | Login" />} />
         <Route
           path="/actualizarcontrasena"

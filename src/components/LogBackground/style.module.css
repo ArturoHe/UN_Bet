@@ -1,4 +1,10 @@
-.colo {
-  min-height: 100vh;
-  background-position: center;
+.background {
+  background: #000000;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 60%,
+    rgba(23, 0, 48, 1) 100%
+  );
+  background-size: cover;
+  height: 100vh;
 }
