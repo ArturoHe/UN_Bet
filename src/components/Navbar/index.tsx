@@ -18,10 +18,10 @@ function index({}: Props) {
 
         <div className="col-6 d-flex justify-content-center align-items-center">
           <a className="nav-link me-5 w-5" href="#">
-            Quienes somos
+            ¿Quienes somos?
           </a>
 
-          <a className="nav-link me-5 w-5" href="#">
+          <a className="nav-link me-5 w-5" href="/games">
             Juegos
           </a>
 
