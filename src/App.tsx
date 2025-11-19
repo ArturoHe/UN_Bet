@@ -19,6 +19,7 @@ import CartFail from "./functionalities/CartFail";
 import CartPending from "./functionalities/CartPending";
 import CartSuccess from "./functionalities/CartSuccess";
 import CreditsPage from "./functionalities/CreditsPage";
+import CreditRequestsPage from "./functionalities/CreditRequestsPage";
 
 function App() {
   return (
@@ -38,6 +39,8 @@ function App() {
 
 
           <Route path="/credits" element={<CreditsPage title="UN Bet|Credits"/>} />
+          <Route path="/credit-requests" element={<CreditRequestsPage title="UN Bet | Solicitudes" />}
+/>
 
           <Route path="/home" element={<Home title="ReWear | Inicio" />} />
           <Route
