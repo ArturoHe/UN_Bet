@@ -18,6 +18,9 @@ import RecoverPass from "./functionalities/RecoverPass";
 import CartFail from "./functionalities/CartFail";
 import CartPending from "./functionalities/CartPending";
 import CartSuccess from "./functionalities/CartSuccess";
+import GameSelector from "./functionalities/GameSelector";
+import Roulette from "./functionalities/Roulette";
+import SlotMachine from "./functionalities/SlotMachine";
 
 function App() {
   return (
@@ -33,6 +36,10 @@ function App() {
 
         {/* Rutas con Layout */}
         <Route element={<Layout />}>
+          <Route path="/games" element={<GameSelector title="UN Bet|Game Selector" />} />  
+          <Route path="/ruleta" element={<Roulette title="UN Bet|Roulette"/>} />
+          <Route path="/tragamonedas" element={<SlotMachine title="UN Bet|SlotMachine" />} />
+          
           <Route path="/home" element={<Home title="ReWear | Inicio" />} />
           <Route
             path="/user/:username"

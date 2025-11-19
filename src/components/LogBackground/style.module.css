@@ -5,6 +5,6 @@
     rgba(0, 0, 0, 1) 60%,
     rgba(23, 0, 48, 1) 100%
   );
-  background-size: cover;
+  background-size:auto;
   height: 100vh;
 }
