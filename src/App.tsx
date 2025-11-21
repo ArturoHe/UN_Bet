@@ -22,6 +22,7 @@ import CreditsPage from "./functionalities/CreditsPage";
 import CreditRequestsPage from "./functionalities/CreditRequestsPage";
 import SlotMachinePage from "./functionalities/SlotMachinePage";
 import GameSelector from "./functionalities/GameSelector";
+import UserProfile from "./functionalities/UserProfile";
 
 function App() {
   return (
@@ -37,20 +38,21 @@ function App() {
 
         {/* Rutas con Layout */}
         <Route element={<Layout />}>
-          <Route path="/credits" element={<CreditsPage title="UN Bet|Credits"/>} />
-          <Route path="/credit-requests" element={<CreditRequestsPage title="UN Bet | Solicitudes" />}/>
-          <Route path="/user/:username" element={<UserProfile title="UNBet | Perfil" />}/>
-
+          <Route path="/credits" element={<CreditsPage title="UN Bet|Credits"/>} /> {/* Ana- Ruta de creditos de user*/}
+          <Route path="/credit-requests" element={<CreditRequestsPage title="UN Bet | Solicitudes" />}/> {/* Ana- Ruta de solicitudes de creditos para admin */}
+          <Route path="/profile/:username" element={<UserProfile title="UNBet | Perfil" />}/> {/* Ana- Ruta de perfil de usuario */}
+          <Route path="/editprofile" element={<UserConfig title="UN Bet | Editar perfil" />}/> {/* Ana- Ruta de eeditar perfil */}
+          <Route path="/slotmachine" element={<SlotMachinePage title="UN Bet | Tragamonedas" />}/> {/* Ana- Ruta de tragamonedas */}
+          <Route path="/gameselector" element={<GameSelector title="UN Bet | Selección de Juegos" />}/> {/* Ana- Ruta de selección de juegos */}
+          
+          
           <Route path="/home" element={<Home title="ReWear | Inicio" />} />
           <Route
             path="/user/:username"
             element={<User title="ReWear | User" />}
           />
 
-          <Route
-            path="/userconfig"
-            element={<UserConfig title="UN Bet | Configuración" />}
-          />
+          
 
           <Route element={<PrivateRoute />}>
             <Route
