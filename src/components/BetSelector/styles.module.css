@@ -1,0 +1,89 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+}
+
+.selector {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.arrow {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.arrow:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.bets {
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.track {
+  display: flex;
+  gap: 0.75rem;
+  transition: transform 420ms cubic-bezier(0.22, 0.9, 0.3, 1);
+  will-change: transform;
+}
+
+.betButton {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(248, 190, 59, 0.3);
+  color: white;
+  padding: 0.5rem ;
+  border-radius: 8px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 60px;
+}
+
+.betButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(248, 190, 59, 0.5);
+}
+
+.betButton.selected {
+  background: linear-gradient(180deg, #2ECC71 0%, #27AE60 100%);
+  border-color: #2ECC71;
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4);
+}
+
+
+
+.selector {
+  position: relative;
+  padding-bottom: 2rem;
+}

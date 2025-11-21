@@ -1,0 +1,36 @@
+/* styles.module.css (Opción A) */
+.page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, rgba(0,0,0,1) 60%, rgba(23,0,48,1) 100%);
+  display: flex;
+  align-items: center;      /* centra verticalmente */
+  justify-content: center;  /* centra horizontalmente */
+  padding: 2rem;
+                 /* separación entre LeftPanel y content */
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  box-sizing: border-box;
+}
+
+/* el contenedor central que agrupa el slot + betselector */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* ajusta según necesites */
+}
+
+
+/* quitamos la posicion absoluta y lo dejamos centrado en el flujo */
+.centerArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 80%;
+  box-sizing: border-box;
+}
+
+/* responsive: apilar cuando sea muy chico */
+

@@ -20,6 +20,8 @@ import CartPending from "./functionalities/CartPending";
 import CartSuccess from "./functionalities/CartSuccess";
 import CreditsPage from "./functionalities/CreditsPage";
 import CreditRequestsPage from "./functionalities/CreditRequestsPage";
+import SlotMachinePage from "./functionalities/SlotMachinePage";
+import GameSelector from "./functionalities/GameSelector";
 
 function App() {
   return (

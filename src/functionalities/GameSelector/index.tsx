@@ -27,7 +27,7 @@ export default function GameSelector({ title }: Props) {
             <GameCard
                 title="Tragamonedas"
                 image="tragamonedas.png"
-                onClick={() => navigate("/tragamonedas")}
+                onClick={() => navigate("/slotmachine")}
             />
         </div>
       
