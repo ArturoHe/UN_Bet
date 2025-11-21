@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import styles from "./style.module.css";
 
 import EditUserForm from "../../components/EditUserForm";
 
@@ -8,14 +9,13 @@ function UserConfig({ title }: Props) {
   useEffect(() => {
     document.title = title;
   });
-  return (
-    <>
-      <div className="container">
+  return ( 
+      <div className={styles.background}>
         <div className="mt-4">
           <EditUserForm />
         </div>
       </div>
-    </>
+    
   );
 }
 

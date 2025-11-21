@@ -1,0 +1,119 @@
+.page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0;
+  color: #fff;
+}
+
+.mainTitle {
+  font-size: 48px;
+  margin-bottom: 30px;
+  color: #f9c400;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.divider{
+    width: 2px;
+    background-color: #ADADAD;
+    margin: 0 10px;
+}
+
+/* IZQUIERDA */
+.left {
+  width: 45%;
+  
+  padding: 25px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 100%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.dataList {
+  width: 100%;
+  font-size: 1rem;
+  margin-bottom: 25px;
+}
+
+.dataList p {
+  margin: 6px 0;
+}
+
+.dataList span {
+  font-weight: bold;
+  color: #f9c400;
+}
+
+/* DERECHA */
+.right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  justify-content: space-around;
+}
+
+.itemCard {
+  display: flex;
+  align-items: center;      /* Centra verticalmente */
+  justify-content: space-between; /* Separa LABEL y DIAMOND */
+  padding: 20px;
+  border-radius: 20px;
+  position: relative;
+}
+
+/* Label alineado a la izquierda */
+.label {
+  font-size: 1.1rem;
+  font-weight: 800;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  color: #fff;
+  margin:0;
+  align-items: center;
+}
+
+/* Contenedor para imagen y monto */
+.diamondWrapper {
+  position: relative;
+  width: 80px;
+  height: 20px;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+
+}
+
+.diamondBox {
+  width: 200px;
+  height: auto;
+  opacity: 0.6;
+}
+
+/* Monto centrado sobre la imagen */
+.amount {
+  position: absolute;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+}

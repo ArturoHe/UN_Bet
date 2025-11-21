@@ -36,19 +36,12 @@ function App() {
         />
 
         {/* Rutas con Layout */}
-
         <Route element={<Layout />}>
-          <Route
-            path="/credits"
-            element={<CreditsPage title="UN Bet | Credits" />}
-          />
-          <Route path="/" element={<LandingPage title="UN Bet" />} />
-          <Route
-            path="/credit-requests"
-            element={<CreditRequestsPage title="UN Bet | Solicitudes" />}
-          />
+          <Route path="/credits" element={<CreditsPage title="UN Bet|Credits"/>} />
+          <Route path="/credit-requests" element={<CreditRequestsPage title="UN Bet | Solicitudes" />}/>
+          <Route path="/user/:username" element={<UserProfile title="UNBet | Perfil" />}/>
 
-          <Route path="/home" element={<Home title="UN Bet | Inicio" />} />
+          <Route path="/home" element={<Home title="ReWear | Inicio" />} />
           <Route
             path="/user/:username"
             element={<User title="ReWear | User" />}

@@ -1,0 +1,12 @@
+.background {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 60%,
+    rgba(23, 0, 48, 1) 100%
+  );
+  min-height: 87.4vh;
+  overflow-y: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
