@@ -1,8 +1,6 @@
-import { Link } from "react-router-dom";
 import Button from "../Button";
 import ButtonAction from "../ButtonAction";
 import styles from "./style.module.css";
-import { IoIosSearch } from "react-icons/io";
 
 type Props = {};
 
@@ -11,7 +9,7 @@ function index({}: Props) {
     <nav className={`navbar bg-body-tertiary ${styles.navColor}`}>
       <div className="container-fluid">
         <div>
-          <a className="navbar-brand ms-5" href="#">
+          <a className="navbar-brand ms-5" href="/">
             <img
               src="logos/logoCompletoRectangular.png"
               alt="Logo"
@@ -25,7 +23,7 @@ function index({}: Props) {
             ¿Quienes somos?
           </a>
 
-          <a className="nav-link me-5 w-5" href="/games">
+          <a className="nav-link me-5 w-5" href="/home">
             Juegos
           </a>
 

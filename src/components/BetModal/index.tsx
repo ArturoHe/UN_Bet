@@ -1,5 +1,5 @@
-import { X } from 'lucide-react';
-import styles from './styles.module.css';
+import { X } from "lucide-react";
+import styles from "./styles.module.css";
 
 interface BetModalProps {
   isOpen: boolean;
@@ -16,7 +16,12 @@ const BET_OPTIONS = [
   [150, 175, 200, 250, 300, 350, 400, 500],
 ];
 
-export default function BetModal({ isOpen, onClose, onBetSelect, selectedBet }: BetModalProps) {
+export default function BetModal({
+  isOpen,
+  onClose,
+  onBetSelect,
+  selectedBet,
+}: BetModalProps) {
   if (!isOpen) return null;
 
   const handleBetClick = (bet: number) => {
@@ -40,7 +45,9 @@ export default function BetModal({ isOpen, onClose, onBetSelect, selectedBet }: 
               {row.map((bet) => (
                 <button
                   key={bet}
-                  className={`${styles.betOption} ${selectedBet === bet ? styles.selected : ''}`}
+                  className={`${styles.betOption} ${
+                    selectedBet === bet ? styles.selected : ""
+                  }`}
                   onClick={() => handleBetClick(bet)}
                 >
                   ${bet}

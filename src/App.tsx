@@ -38,72 +38,83 @@ function App() {
 
         {/* Rutas con Layout */}
         <Route element={<Layout />}>
-          <Route path="/credits" element={<CreditsPage title="UN Bet|Credits"/>} /> {/* Ana- Ruta de creditos de user*/}
-          <Route path="/credit-requests" element={<CreditRequestsPage title="UN Bet | Solicitudes" />}/> {/* Ana- Ruta de solicitudes de creditos para admin */}
-          <Route path="/profile/:username" element={<UserProfile title="UNBet | Perfil" />}/> {/* Ana- Ruta de perfil de usuario */}
-          <Route path="/editprofile" element={<UserConfig title="UN Bet | Editar perfil" />}/> {/* Ana- Ruta de eeditar perfil */}
-          <Route path="/slotmachine" element={<SlotMachinePage title="UN Bet | Tragamonedas" />}/> {/* Ana- Ruta de tragamonedas */}
-          <Route path="/gameselector" element={<GameSelector title="UN Bet | Selección de Juegos" />}/> {/* Ana- Ruta de selección de juegos */}
-          
-          
-          <Route path="/home" element={<Home title="ReWear | Inicio" />} />
+          <Route
+            path="/credits"
+            element={<CreditsPage title="UN Bet|Credits" />}
+          />{" "}
+          {/* Ana- Ruta de creditos de user*/}
+          <Route
+            path="/credit-requests"
+            element={<CreditRequestsPage title="UN Bet | Solicitudes" />}
+          />{" "}
+          {/* Ana- Ruta de solicitudes de creditos para admin */}
+          <Route
+            path="/profile/:username"
+            element={<UserProfile title="UNBet | Perfil" />}
+          />{" "}
+          {/* Ana- Ruta de perfil de usuario */}
+          <Route
+            path="/editprofile"
+            element={<UserConfig title="UN Bet | Editar perfil" />}
+          />{" "}
+          {/* Ana- Ruta de eeditar perfil */}
+          <Route
+            path="/slotmachine"
+            element={<SlotMachinePage title="UN Bet | Tragamonedas" />}
+          />{" "}
+          {/* Ana- Ruta de tragamonedas */}
+          <Route
+            path="/home"
+            element={<GameSelector title="UN Bet | Selección de Juegos" />}
+          />{" "}
+          {/* Ana- Ruta de selección de juegos */}
+          <Route path="/" element={<LandingPage title="UN Bet" />} />
           <Route
             path="/user/:username"
             element={<User title="ReWear | User" />}
           />
-
-          
-
           <Route element={<PrivateRoute />}>
             <Route
               path="/newproduct"
               element={<NewProduct title="ReWear | Product" />}
             />
           </Route>
-
           <Route element={<PrivateRoute />}>
             <Route
               path="/editproduct/:id"
               element={<ProductEdit title="ReWear | Edit" />}
             />
           </Route>
-
           <Route element={<PrivateRoute />}>
             <Route
               path="/success"
               element={<CartSuccess title="ReWear | Edit" />}
             />
           </Route>
-
           <Route element={<PrivateRoute />}>
             <Route
               path="/failure"
               element={<CartFail title="ReWear | Edit" />}
             />
           </Route>
-
           <Route element={<PrivateRoute />}>
             <Route
               path="/pending"
               element={<CartPending title="ReWear | Edit" />}
             />
           </Route>
-
           <Route
             path="/product/:id"
             element={<Product title="ReWear | Product" />}
           />
-
           <Route
             path="/search/:filter"
             element={<Search title="ReWear | Search" />}
           />
-
           <Route
             path="/history"
             element={<History title="ReWear | Configuración" />}
           />
-
           <Route path="*" element={<ErrorPage title="UN Bet | 404" />} />
         </Route>
       </Routes>

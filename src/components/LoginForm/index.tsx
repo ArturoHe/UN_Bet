@@ -23,11 +23,12 @@ function LoginForm({ onReturn, onRecoverPassword }: Props) {
     };
 
     try {
-      const response = await axios.post<LoginResponse>(
-        "https://backend-rewear-production.up.railway.app/login",
-        payload
-      );
+      const response = await api.post<LoginResponse>("/auth/login", payload);
 
+      console.log(response.data);
+      alert("Inicio de sesión exitoso");
+      window.location.href = "/home";
+      /*
       const token = response.data.token;
 
       const responseId = await api.get<authResponse>("/perfil", {
@@ -53,7 +54,7 @@ function LoginForm({ onReturn, onRecoverPassword }: Props) {
         }
       } else {
         alert("No se recibió un token");
-      }
+      }*/
     } catch (error) {
       alert("Error en el inicio de sesión");
     }

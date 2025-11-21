@@ -26,12 +26,12 @@ function RegisterForm({ onReturn }: Props) {
     };
     console.log("payload", payload);
     try {
-      const response = await axios.post<LoginResponse>(
-        "https://backend-UN Bet-production.up.railway.app/register",
-        payload
-      );
+      const response = await api.post<LoginResponse>("/auth/signup", payload);
 
       console.log("response", response);
+      alert("Registro Exitoso");
+      window.location.href = "/login";
+      /*
       const token = response.data.token;
 
       const responseId = await api.get<authResponse>("/perfil", {
@@ -51,7 +51,7 @@ function RegisterForm({ onReturn }: Props) {
         window.location.href = "/home";
       } else {
         alert("No se recibió un token");
-      }
+      }*/
     } catch (error) {
       console.error("Error en el Registro", error);
       alert("Error en el Registro");
