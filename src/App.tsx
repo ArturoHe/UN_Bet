@@ -57,7 +57,7 @@ function App() {
             path="/editprofile"
             element={<UserConfig title="UN Bet | Editar perfil" />}
           />{" "}
-          {/* Ana- Ruta de eeditar perfil */}
+          {/* Ana- Ruta de editar perfil */}
           <Route
             path="/slotmachine"
             element={<SlotMachinePage title="UN Bet | Tragamonedas" />}

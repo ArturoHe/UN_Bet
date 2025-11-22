@@ -2,15 +2,13 @@ import Button from "../Button";
 import ButtonAction from "../ButtonAction";
 import styles from "./style.module.css";
 import { CgProfile } from "react-icons/cg";
+import "bootstrap/js/dist/dropdown";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 type Props = {};
 
 function index({}: Props) {
   const logged = sessionStorage.getItem("username");
-
-  const handleProfile = () => {
-    window.location.href = `/profile/${logged}`;
-  };
 
   const handleLogout = () => {
     window.location.href = "/landing";
@@ -59,19 +57,45 @@ function index({}: Props) {
               </>
             ) : (
               <>
-                <div className="btn-group">
-                  <button className="btn btn-secondary btn-sm" type="button">
-                    {logged}
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split"
+                <div className={`dropdown`}>
+                  <a
+                    className={`btn btn-secondary dropdown-toggle ${styles.baseProfileBtn}`}
+                    href="#"
+                    role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <span className="visually-hidden">Toggle Dropdown</span>
-                  </button>
-                  <ul className="dropdown-menu">...</ul>
+                    {logged}
+                    <CgProfile size={"1.5rem"} className="ms-2" />
+                  </a>
+
+                  <ul className={`dropdown-menu ${styles.menuProfile}`}>
+                    <li>
+                      <a
+                        className={`dropdown-item ${styles.optionMenuProfile}`}
+                        href={`/profile/${logged}`}
+                      >
+                        Perfil
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className={`dropdown-item ${styles.optionMenuProfile}`}
+                        href="/credits"
+                      >
+                        Solicitar Créditos
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className={`dropdown-item ${styles.optionMenuProfile}`}
+                        href="/landing"
+                        onClick={handleLogout}
+                      >
+                        Cerrar Sesión
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </>
             )}
