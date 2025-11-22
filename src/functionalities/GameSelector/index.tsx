@@ -3,34 +3,31 @@ import { useEffect } from "react";
 import styles from "./style.module.css";
 import { useNavigate } from "react-router-dom";
 
-
-
 type Props = {
   title: string;
 };
 
 export default function GameSelector({ title }: Props) {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        document.title = title;
-      }, [title]);
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
   return (
     <div className={styles.background}>
-        <div className={styles.container}>
-            <GameCard
-                title="Ruleta"
-                image="ruleta.png"
-                onClick={() => navigate("/ruleta")}
-            />
+      <div className={styles.container}>
+        <GameCard
+          title="Ruleta"
+          image="ruleta.webp"
+          onClick={() => navigate("/ruleta")}
+        />
 
-            <GameCard
-                title="Tragamonedas"
-                image="tragamonedas.png"
-                onClick={() => navigate("/slotmachine")}
-            />
-        </div>
-      
+        <GameCard
+          title="Tragamonedas"
+          image="tragamonedas.png"
+          onClick={() => navigate("/slotmachine")}
+        />
+      </div>
     </div>
   );
 }

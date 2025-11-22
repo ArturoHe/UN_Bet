@@ -30,7 +30,7 @@ function NavUser({}: Props) {
           <div className=" mx-1">
             <Link
               className={`form-control ${styles.s}`}
-              to={`/user/${userName}`}
+              to={`/profile/${userName}`}
             >
               Mi Perfil
             </Link>

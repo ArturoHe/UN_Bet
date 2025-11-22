@@ -25,15 +25,11 @@ function LoginForm({ onReturn, onRecoverPassword }: Props) {
     try {
       const response = await api.post<LoginResponse>("/auth/login", payload);
 
-      console.log(response.data);
-      alert("Inicio de sesión exitoso");
-      window.location.href = "/home";
-      /*
-      const token = response.data.token;
+      const token = response.data.access_token;
 
-      const responseId = await api.get<authResponse>("/perfil", {
+      const responseId = await api.get<authResponse>("/auth/me", {
         headers: {
-          Authorization: `${token}`,
+          Authorization: `bearer ${token}`,
         },
       });
 
@@ -54,7 +50,7 @@ function LoginForm({ onReturn, onRecoverPassword }: Props) {
         }
       } else {
         alert("No se recibió un token");
-      }*/
+      }
     } catch (error) {
       alert("Error en el inicio de sesión");
     }
@@ -70,7 +66,7 @@ function LoginForm({ onReturn, onRecoverPassword }: Props) {
           type="text"
           className={`form-control ${styles.loginSlot}`}
           id="emailSlotLogin"
-          placeholder="Correo Electronico o Usuario"
+          placeholder="Usuario"
         />
       </div>
       <div className="my-3">

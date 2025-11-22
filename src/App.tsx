@@ -69,6 +69,7 @@ function App() {
           />{" "}
           {/* Ana- Ruta de selección de juegos */}
           <Route path="/" element={<LandingPage title="UN Bet" />} />
+          <Route path="/landing" element={<LandingPage title="UN Bet" />} />
           <Route
             path="/user/:username"
             element={<User title="ReWear | User" />}

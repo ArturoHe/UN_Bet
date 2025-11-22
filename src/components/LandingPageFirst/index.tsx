@@ -5,8 +5,15 @@ import ButtonAction from "../ButtonAction";
 type Props = {};
 
 function LandingPage({}: Props) {
+  const logged = sessionStorage.getItem("username");
+
   const handleLogin = () => {
     window.location.href = "/login";
+  };
+
+  const handleLogout = () => {
+    window.location.href = "/";
+    sessionStorage.clear();
   };
   return (
     <>
@@ -36,14 +43,24 @@ function LandingPage({}: Props) {
                 </h2>
               </div>
 
-              <div className="d-flex mt-5">
-                <div className="p-3" style={{ width: "10rem" }}>
-                  <ButtonAction text="Registrarse" onClick={handleLogin} />
-                </div>
-                <div className="p-3" style={{ width: "10rem" }}>
-                  <Button text="Ingresar" onClick={handleLogin} />
-                </div>
-              </div>
+              {logged ? (
+                <>
+                  <div className="mt-5" style={{ width: "10rem" }}>
+                    <ButtonAction text="Cerrar Sesión" onClick={handleLogout} />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="d-flex mt-5">
+                    <div className="p-3" style={{ width: "10rem" }}>
+                      <ButtonAction text="Ingresar" onClick={handleLogin} />
+                    </div>
+                    <div className="p-3" style={{ width: "10rem" }}>
+                      <Button text="Registrarse" onClick={handleLogin} />
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
@@ -51,7 +68,7 @@ function LandingPage({}: Props) {
             className="col-6 justify-content-center d-flex align-items-center"
             style={{ height: "86vh" }}
           >
-            <img src="ruleta.png" alt="" width={"60%"} />
+            <img src="ruleta.webp" alt="" width={"60%"} />
           </div>
         </div>
       </div>
