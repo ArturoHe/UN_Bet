@@ -13,3 +13,7 @@ export interface authResponse {
   username: string;
   id: string;
 }
+
+export interface BalanceResponse {
+  balance: number;
+}

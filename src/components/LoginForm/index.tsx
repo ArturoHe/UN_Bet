@@ -1,7 +1,7 @@
 import React from "react";
 import ButtonAction from "../ButtonAction";
 import styles from "./style.module.css";
-import axios from "axios";
+
 import api from "../../api/axiosConfig";
 import { authResponse, LoginResponse } from "../../api/types";
 

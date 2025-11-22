@@ -3,7 +3,6 @@ import ButtonAction from "../ButtonAction";
 import styles from "./style.module.css";
 import { authResponse, LoginResponse } from "../../api/types";
 import api from "../../api/axiosConfig";
-import axios from "axios";
 
 type Props = {
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -31,8 +30,8 @@ function RegisterForm({ onReturn }: Props) {
       console.log("response", response);
       alert("Registro Exitoso");
       window.location.href = "/login";
-      /*
-      const token = response.data.token;
+
+      const token = response.data.access_token;
 
       const responseId = await api.get<authResponse>("/perfil", {
         headers: {
@@ -51,7 +50,7 @@ function RegisterForm({ onReturn }: Props) {
         window.location.href = "/home";
       } else {
         alert("No se recibió un token");
-      }*/
+      }
     } catch (error) {
       console.error("Error en el Registro", error);
       alert("Error en el Registro");

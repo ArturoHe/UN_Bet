@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import api from "../../api/axiosConfig";
 import CreditRequestRow from "../../components/CreditRequestRow";
 import styles from "./style.module.css";
 
@@ -14,8 +13,7 @@ type Props = {
   title: string;
 };
 
-export default function CreditRequestsPage({ title }: Props) {
-  
+export default function CreditRequestsPage({}: Props) {
   const [requests, setRequests] = useState<CreditRequest[]>([]);
 
   useEffect(() => {
@@ -23,11 +21,30 @@ export default function CreditRequestsPage({ title }: Props) {
 
     // TEMPORAL: Datos mock mientras se conecta al backend
     const mockData: CreditRequest[] = [
-      { id: 1, username: "anago2025", currentBalance: 10500, requestedAmount: 5000 },
-      { id: 2, username: "arturo2025", currentBalance: 1100, requestedAmount: 100000 },
-      { id: 3, username: "manuel2025", currentBalance: 0, requestedAmount: 8000 },
-      { id: 4, username: "daniel2025", currentBalance: 85000, requestedAmount: 5500 },
-      
+      {
+        id: 1,
+        username: "anago2025",
+        currentBalance: 10500,
+        requestedAmount: 5000,
+      },
+      {
+        id: 2,
+        username: "arturo2025",
+        currentBalance: 1100,
+        requestedAmount: 100000,
+      },
+      {
+        id: 3,
+        username: "manuel2025",
+        currentBalance: 0,
+        requestedAmount: 8000,
+      },
+      {
+        id: 4,
+        username: "daniel2025",
+        currentBalance: 85000,
+        requestedAmount: 5500,
+      },
     ];
 
     setRequests(mockData);
@@ -71,7 +88,6 @@ export default function CreditRequestsPage({ title }: Props) {
         <div className={styles.headerItem}>Cantidad solicitada</div>
         <div></div> {/* columna de acciones */}
       </div>
-
 
       <div className={styles.list}>
         {requests.map((req) => (

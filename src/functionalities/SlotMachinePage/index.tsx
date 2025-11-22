@@ -1,20 +1,20 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { useEffect } from "react";
-import BetSelector from '../../components/BetSelector';
-import BetModal from '../../components/BetModal';
-import LeftPanel from '../../components/LeftPanel';
-import styles from './styles.module.css';
-import SlotMachine from '../../components/SlotMachine';
+import BetSelector from "../../components/BetSelector";
+import BetModal from "../../components/BetModal";
+import LeftPanel from "../../components/LeftPanel";
+import styles from "./styles.module.css";
+import SlotMachine from "../../components/SlotMachine";
 
 type Props = { title: string };
 
 export default function SlotMachinePage({ title }: Props) {
   useEffect(() => {
-      document.title = title;
-    }, []);
-  
-  const [winnings, setWinnings] = useState(10000);
-  const [balance, setBalance] = useState(10500);
+    document.title = title;
+  }, []);
+
+  const [winnings /*setWinnings*/] = useState(10000);
+  const [balance /*setBalance*/] = useState(10500);
   const [selectedBet, setSelectedBet] = useState(20);
   const [isSpinning, setIsSpinning] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,16 +31,19 @@ export default function SlotMachinePage({ title }: Props) {
 
   return (
     <div className={styles.page}>
-      <div className={styles.leftPanel}><LeftPanel winnings={winnings} balance={balance} /></div>
-      
+      <div className={styles.leftPanel}>
+        <LeftPanel winnings={winnings} balance={balance} />
+      </div>
+
       <div className={styles.content}>
         <div className={styles.centerArea}>
-          <SlotMachine onSpin={handleSpin} isSpinning={isSpinning} onOpenModal={() => setIsModalOpen(true)} />
-        </div>
-        <BetSelector
-            selectedBet={selectedBet}
-            onBetChange={setSelectedBet}
+          <SlotMachine
+            onSpin={handleSpin}
+            isSpinning={isSpinning}
+            onOpenModal={() => setIsModalOpen(true)}
           />
+        </div>
+        <BetSelector selectedBet={selectedBet} onBetChange={setSelectedBet} />
       </div>
 
       <BetModal

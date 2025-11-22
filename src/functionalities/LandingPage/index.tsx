@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
 import LandingPageFirst from "../../components/LandingPageFirst";
-import LandingPageSecond from "../../components/LandingPageSecond";
 
 type Props = { title: string };
 

@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import styles from "./style.module.css";
 import api from "../../api/axiosConfig";
+import { BalanceResponse } from "../../api/types";
 
 export default function CreditsCard() {
   const [credits, setCredits] = useState<number | "">("");
   const [balance, setBalance] = useState<number>(0);
 
-  //TO-DO: Revisar fetch balance del backend 
+  //TO-DO: Revisar fetch balance del backend
   const fetchBalance = async () => {
     try {
       const token = sessionStorage.getItem("jwtToken");
 
-      const response = await api.get("/credits/balance", {
+      const response = await api.get<BalanceResponse>("/credits/balance", {
         headers: {
           Authorization: `${token}`,
         },
@@ -36,8 +37,10 @@ export default function CreditsCard() {
 
     try {
       const token = sessionStorage.getItem("jwtToken");
+      console.log("Solicitud de créditos:", credits);
+      console.log("Token:", token);
 
-      const response = await api.post(
+      /*const response = await api.post(
         "/credits/request",
         { amount: credits },
         {
@@ -45,11 +48,8 @@ export default function CreditsCard() {
             Authorization: `${token}`,
           },
         }
-      );
-
-      alert("Solicitud enviada con éxito");
+      );*/ alert("Solicitud enviada con éxito");
       setCredits("");
-
     } catch (error) {
       console.error("Error enviando solicitud:", error);
       alert("No se pudo enviar la solicitud");

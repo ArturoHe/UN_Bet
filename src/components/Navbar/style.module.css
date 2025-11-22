@@ -1,30 +1,30 @@
 .navColor {
   background-color: #000000 !important;
-  color: white !important;
+  color: rgb(255, 255, 255);
   font-size: 1rem !important;
   height: 5rem;
 }
 
 .baseProfileBtn {
-  background-color: rgba(0, 0, 0, 0);
-  border-color: rgba(255, 210, 28, 1);
-  border-radius: 30px;
+  background-color: rgba(0, 0, 0, 0) !important;
+  border-color: rgba(255, 210, 28, 1) !important;
+  border-radius: 30px !important;
 }
 
 .baseProfileBtn:hover {
-  background-color: rgba(255, 210, 28, 1);
+  background-color: rgba(255, 210, 28, 1) !important;
   color: black !important;
-  border-color: rgba(255, 210, 28, 1);
+  border-color: rgba(255, 210, 28, 1) !important;
 }
 
 .menuProfile {
-  background-color: black;
+  background-color: black !important;
 }
 
 .optionMenuProfile {
-  color: white;
+  color: white !important;
 }
 .optionMenuProfile:hover {
-  background-color: rgba(255, 210, 28, 1);
+  background-color: rgba(255, 210, 28, 1) !important;
   color: black !important;
 }

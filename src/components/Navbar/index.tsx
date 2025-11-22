@@ -3,7 +3,6 @@ import ButtonAction from "../ButtonAction";
 import styles from "./style.module.css";
 import { CgProfile } from "react-icons/cg";
 import "bootstrap/js/dist/dropdown";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 type Props = {};
 
@@ -17,7 +16,7 @@ function index({}: Props) {
 
   return (
     <>
-      <nav className={`navbar bg-body-tertiary ${styles.navColor}`}>
+      <nav className={`navbar ${styles.navColor}`}>
         <div className="container-fluid">
           <div>
             <a className="navbar-brand ms-5" href="/">
