@@ -16,12 +16,15 @@ function RegisterForm({ onReturn }: Props) {
 
     const formData = new FormData(event.currentTarget);
     const payload = {
-      first_name: formData.get("first_name"),
-      last_names: formData.get("last_names"),
-      phone: formData.get("phone"),
-      username: formData.get("username"),
       email: formData.get("email"),
+      username: formData.get("username"),
       password: formData.get("password"),
+      name: formData.get("first_name"),
+      apellidos: formData.get("last_names"),
+      telefono: formData.get("phone"),
+      born_date: formData.get("birthDate"),
+      cedula: formData.get("idNumber"),
+      tipo_documento: "CC",
     };
     console.log("payload", payload);
     try {
@@ -157,21 +160,21 @@ function RegisterForm({ onReturn }: Props) {
             <label htmlFor="birthDate" className="form-label"></label>
             <input
               required
-              name="phone"
+              name="birthDate"
               type="date"
               className={`form-control ${styles.loginSlot}`}
-              id="phoneSlotRegister"
+              id="birthDate"
             />
           </div>
 
           <div className="my-2">
-            <label htmlFor="birthDate" className="form-label"></label>
+            <label htmlFor="idNumber" className="form-label"></label>
             <input
               required
-              name="phone"
+              name="idNumber"
               type="number"
               className={`form-control ${styles.loginSlot}`}
-              id="phoneSlotRegister"
+              id="idNumber"
               placeholder="Cédula de ciudadanía"
             />
           </div>

@@ -15,5 +15,5 @@ export interface authResponse {
 }
 
 export interface BalanceResponse {
-  balance: number;
+  saldo: number;
 }

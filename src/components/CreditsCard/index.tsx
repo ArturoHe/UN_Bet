@@ -12,13 +12,15 @@ export default function CreditsCard() {
     try {
       const token = sessionStorage.getItem("jwtToken");
 
-      const response = await api.get<BalanceResponse>("/credits/balance", {
+      const response = await api.get<BalanceResponse>("/profile/me/saldo", {
         headers: {
-          Authorization: `${token}`,
+          Authorization: `bearer ${token}`,
         },
       });
 
-      setBalance(response.data.balance);
+      setBalance(response.data.saldo);
+      console.log("Balance obtenido:", response.data.saldo);
+      console.log("Token usado:", token);
     } catch (error) {
       console.error("Error obteniendo balance:", error);
       alert("No se pudo obtener el saldo");

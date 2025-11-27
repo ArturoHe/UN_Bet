@@ -3,6 +3,7 @@ import ButtonAction from "../ButtonAction";
 import styles from "./style.module.css";
 import { CgProfile } from "react-icons/cg";
 import "bootstrap/js/dist/dropdown";
+import logo from "/logos/logoCompletoRectangular.webp";
 
 type Props = {};
 
@@ -20,11 +21,7 @@ function index({}: Props) {
         <div className="container-fluid">
           <div>
             <a className="navbar-brand ms-5" href="/">
-              <img
-                src="logos/logoCompletoRectangular.webp"
-                alt="Logo"
-                width={60}
-              />
+              <img src={logo} alt="Logo" width={60} />
             </a>
           </div>
 

@@ -11,11 +11,13 @@ function UserProfileCard() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await api.get(`/user/${username}`, {
-          headers: { Authorization: sessionStorage.getItem("jwtToken") }
+        const response = await api.get(`/profile/${username}`, {
+          headers: { Authorization: sessionStorage.getItem("jwtToken") },
         });
 
         setUser(response.data);
+
+        console.log("Datos de usuario obtenidos del backend:", response.data);
       } catch (error) {
         console.log("ERROR en backend, usando datos temporales...");
 
@@ -31,7 +33,7 @@ function UserProfileCard() {
           saldo: 85000,
           ganancias: 154000,
           perdidas: 20000,
-          imageUrl: "/parmero.jpeg"
+          imageUrl: "/parmero.jpeg",
         });
       }
     };
@@ -59,13 +61,27 @@ function UserProfileCard() {
           />
 
           <div className={styles.dataList}>
-            <p><span>Nombre(s):</span> {user.nombre}</p>
-            <p><span>Apellidos:</span> {user.apellidos}</p>
-            <p><span>Usuario:</span> {user.username}</p>
-            <p><span>Correo Electrónico:</span> {user.email}</p>
-            <p><span>Teléfono:</span> {user.phone}</p>
-            <p><span>Fecha de Nacimiento:</span> {user.fechaNacimiento}</p>
-            <p><span>Cédula:</span> {user.cc}</p>
+            <p>
+              <span>Nombre(s):</span> {user.nombres}
+            </p>
+            <p>
+              <span>Apellidos:</span> {user.apellidos}
+            </p>
+            <p>
+              <span>Usuario:</span> {user.usuario}
+            </p>
+            <p>
+              <span>Correo Electrónico:</span> {user.correo_electronico}
+            </p>
+            <p>
+              <span>Teléfono:</span> {user.telefono}
+            </p>
+            <p>
+              <span>Fecha de Nacimiento:</span> {user.fecha_nacimiento}
+            </p>
+            <p>
+              <span>N. Documento:</span> {user.numero_documento}
+            </p>
           </div>
 
           <ButtonAction text="Editar" onClick={handleEdit} />
@@ -76,25 +92,24 @@ function UserProfileCard() {
           <div className={styles.itemCard}>
             <p className={styles.label}>SALDO</p>
             <div className={styles.diamondWrapper}>
-               <img src="/box.png" className={styles.diamondBox} />
-               <span className={styles.amount}>${user.saldo}</span>
+              <img src="/box.png" className={styles.diamondBox} />
+              <span className={styles.amount}>${user.saldo}</span>
             </div>
           </div>
-
 
           <div className={styles.itemCard}>
             <p className={styles.label}>GANANCIAS TOTALES</p>
             <div className={styles.diamondWrapper}>
-               <img src="/box.png" className={styles.diamondBox} />
-               <span className={styles.amount}>${user.ganancias}</span>
+              <img src="/box.png" className={styles.diamondBox} />
+              <span className={styles.amount}>${user.ganancias_totales}</span>
             </div>
           </div>
 
           <div className={styles.itemCard}>
             <p className={styles.label}>PERDIDAS TOTALES</p>
             <div className={styles.diamondWrapper}>
-               <img src="/box.png" className={styles.diamondBox} />
-               <span className={styles.amount}>${user.perdidas}</span>
+              <img src="/box.png" className={styles.diamondBox} />
+              <span className={styles.amount}>${user.perdidas_totales}</span>
             </div>
           </div>
         </div>
