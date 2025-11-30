@@ -17,6 +17,7 @@ import CreditRequestsPage from "./functionalities/CreditRequestsPage";
 import SlotMachinePage from "./functionalities/SlotMachinePage";
 import GameSelector from "./functionalities/GameSelector";
 import UserProfile from "./functionalities/UserProfile";
+import Ruleta from "./functionalities/Roulette";
 
 function App() {
   return (
@@ -55,6 +56,11 @@ function App() {
           <Route
             path="/slotmachine"
             element={<SlotMachinePage title="UN Bet | Tragamonedas" />}
+          />{" "}
+          {/* Ana- Ruta de tragamonedas */}
+          <Route
+            path="/roulette"
+            element={<Ruleta title="UN Bet | Ruleta" />}
           />{" "}
           {/* Ana- Ruta de tragamonedas */}
           <Route
