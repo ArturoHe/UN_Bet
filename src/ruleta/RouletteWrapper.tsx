@@ -51,6 +51,7 @@ class RouletteWrapper extends React.Component<any, any> {
     serverSeedHash: null,
     clientSeed: this.generateClientSeed(),
     isSpinning: false,
+    userBalance: 0,
   };
   socketServer: any;
   animateProgress: any;
@@ -89,8 +90,22 @@ class RouletteWrapper extends React.Component<any, any> {
         serverSeedHash: session.server_seed_hash,
       });
       console.log("Sesión de ruleta creada:", session);
+
+      // Obtener saldo inicial
+      await this.fetchBalance();
     } catch (error) {
       console.error("Error al crear sesión de ruleta:", error);
+    }
+  }
+
+  // Obtener el saldo del usuario
+  async fetchBalance() {
+    try {
+      const balanceData = await rouletteApi.getBalance();
+      this.setState({ userBalance: balanceData.saldo });
+      console.log("Saldo actualizado:", balanceData.saldo);
+    } catch (error) {
+      console.error("Error al obtener saldo:", error);
     }
   }
 
@@ -137,10 +152,14 @@ class RouletteWrapper extends React.Component<any, any> {
   }
 
   async componentDidMount() {
-    console.log("RouletteWrapper montado");
+    console.log(
+      "🔵 RouletteWrapper montado - ID:",
+      Math.random().toString(36).substring(7)
+    );
     await this.initializeSession();
   }
   componentWillUnmount() {
+    console.log("🔴 RouletteWrapper desmontado");
     // TODO: Cerrar conexión de socket cuando esté inicializado
     // this.socketServer.close();
   }
@@ -318,6 +337,8 @@ class RouletteWrapper extends React.Component<any, any> {
   }
 
   async placeBet() {
+    console.log("🎯 placeBet() llamado - Timestamp:", Date.now());
+
     if (!this.state.sessionId || this.state.stage !== GameStages.PLACE_BET) {
       console.warn("No se puede apostar en este momento");
       return;
@@ -330,8 +351,26 @@ class RouletteWrapper extends React.Component<any, any> {
       return;
     }
 
+    // Calcular el total de la apuesta
+    let totalBetAmount = 0;
+    for (let key of Array.from(placedChipsMap.keys())) {
+      var chipsPlaced = placedChipsMap.get(key) as PlacedChip;
+      totalBetAmount += chipsPlaced.sum;
+    }
+
+    // Validar saldo antes de apostar
+    if (totalBetAmount > this.state.userBalance) {
+      alert(
+        `Saldo insuficiente. Necesitas ${totalBetAmount} pero solo tienes ${this.state.userBalance}`
+      );
+      return;
+    }
+
     console.log("=== INICIO DE APUESTAS ===");
+    console.log("SessionID actual:", this.state.sessionId);
     console.log("Total de apuestas a enviar:", placedChipsMap.size);
+    console.log("Monto total a apostar:", totalBetAmount);
+    console.log("Saldo actual:", this.state.userBalance);
 
     try {
       // Procesar cada apuesta
@@ -345,6 +384,7 @@ class RouletteWrapper extends React.Component<any, any> {
         };
 
         console.log(`Apuesta #${apuestaNumero}:`, betRequest);
+        console.log(`Monto a apostar: ${chipsPlaced.sum}`);
 
         this.setState({ isSpinning: true, stage: GameStages.NO_MORE_BETS });
 
@@ -354,13 +394,30 @@ class RouletteWrapper extends React.Component<any, any> {
         );
 
         console.log(`Respuesta apuesta #${apuestaNumero}:`, betResponse);
-        
+
+        // Verificar el balance del usuario
+        if (betResponse.user) {
+          console.log(
+            "Balance del usuario después de apostar:",
+            betResponse.user.balance
+          );
+        }
+
+        // Verificar el resultado de la apuesta
+        if (betResponse.bet_result) {
+          console.log("Resultado de la apuesta:", betResponse.bet_result);
+          console.log("Ganancia/Pérdida:", betResponse.bet_result.payout || 0);
+        }
+
         // El backend ya devuelve el resultado del giro en la respuesta
         if (betResponse.spin) {
           const spinResult = betResponse.spin;
-          
+
           // Actualizar el historial
-          const newHistory = [spinResult.pocket, ...this.state.history].slice(0, 10);
+          const newHistory = [spinResult.pocket, ...this.state.history].slice(
+            0,
+            10
+          );
 
           // Actualizar el estado con el resultado
           this.setState({
@@ -373,12 +430,15 @@ class RouletteWrapper extends React.Component<any, any> {
 
           console.log("Resultado del giro (desde apuesta):", spinResult);
 
+          // Actualizar el saldo después de la apuesta
+          await this.fetchBalance();
+
           // Después de 5 segundos, volver a la etapa de apuestas
           setTimeout(() => {
             this.setState({ stage: GameStages.PLACE_BET });
           }, 5000);
         }
-        
+
         apuestaNumero++;
       }
 
@@ -538,6 +598,13 @@ class RouletteWrapper extends React.Component<any, any> {
               >
                 {this.state.isSpinning ? "Girando..." : "Place Bet & Spin"}
               </Button>
+            </li>
+            <li style={{ marginLeft: "10px" }}>
+              <div
+                style={{ fontSize: "14px", color: "#fff", fontWeight: "bold" }}
+              >
+                💰 Saldo: ${this.state.userBalance.toFixed(2)}
+              </div>
             </li>
             <li style={{ marginLeft: "10px" }}>
               <div style={{ fontSize: "12px", color: "#fff" }}>

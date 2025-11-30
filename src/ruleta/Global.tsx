@@ -43,6 +43,7 @@ export type RouletteWrapperState = {
   serverSeedHash: string | null;
   clientSeed: string;
   isSpinning: boolean;
+  userBalance: number;
 };
 export type Winner = {
   username: string;

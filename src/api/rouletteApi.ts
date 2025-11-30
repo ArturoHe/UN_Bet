@@ -1,4 +1,5 @@
 import api from "./axiosConfig";
+import { BalanceResponse } from "./types";
 
 // Interfaces para la API de ruleta
 export interface RouletteSession {
@@ -98,6 +99,19 @@ export const rouletteApi = {
         },
       }
     );
+    return response.data;
+  },
+
+  /**
+   * Obtener el saldo del usuario
+   */
+  getBalance: async (): Promise<BalanceResponse> => {
+    const token = sessionStorage.getItem("jwtToken");
+    const response = await api.get<BalanceResponse>("/profile/me/saldo", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   },
 };
