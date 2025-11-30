@@ -6,12 +6,7 @@ import UserConfig from "./functionalities/UserConfig";
 import LandingPage from "./functionalities/LandingPage";
 import Layout from "./components/Layout";
 import ErrorPage from "./functionalities/ErrorPage";
-import PrivateRoute from "./components/PrivateRoute";
-import History from "./functionalities/History";
 import RecoverPass from "./functionalities/RecoverPass";
-import CartFail from "./functionalities/CartFail";
-import CartPending from "./functionalities/CartPending";
-import CartSuccess from "./functionalities/CartSuccess";
 import CreditsPage from "./functionalities/CreditsPage";
 import CreditRequestsPage from "./functionalities/CreditRequestsPage";
 import SlotMachinePage from "./functionalities/SlotMachinePage";
@@ -71,25 +66,7 @@ function App() {
           <Route path="/" element={<LandingPage title="UN Bet" />} />
           <Route path="/landing" element={<LandingPage title="UN Bet" />} />
         </Route>
-        <Route element={<PrivateRoute />}>
-          <Route
-            path="/success"
-            element={<CartSuccess title="ReWear | Edit" />}
-          />
-        </Route>
-        <Route element={<PrivateRoute />}>
-          <Route path="/failure" element={<CartFail title="ReWear | Edit" />} />
-        </Route>
-        <Route element={<PrivateRoute />}>
-          <Route
-            path="/pending"
-            element={<CartPending title="ReWear | Edit" />}
-          />
-        </Route>
-        <Route
-          path="/history"
-          element={<History title="ReWear | Configuración" />}
-        />
+
         <Route path="*" element={<ErrorPage title="UN Bet | 404" />} />
       </Routes>
     </Router>
