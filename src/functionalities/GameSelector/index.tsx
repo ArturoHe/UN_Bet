@@ -19,7 +19,7 @@ export default function GameSelector({ title }: Props) {
         <GameCard
           title="Ruleta"
           image="ruleta.webp"
-          onClick={() => navigate("/ruleta")}
+          onClick={() => navigate("/roulette")}
         />
 
         <GameCard
