@@ -7,10 +7,13 @@ Esta implementación conecta el frontend de la ruleta con el backend usando las 
 ## Endpoints Implementados
 
 ### 1. Crear Sesión
+
 ```
 POST /v1/roulette/session
 ```
+
 **Respuesta:**
+
 ```json
 {
   "session_id": 1,
@@ -19,10 +22,13 @@ POST /v1/roulette/session
 ```
 
 ### 2. Obtener Hash de Sesión
+
 ```
 GET /v1/roulette/session/{session_id}/hash
 ```
+
 **Respuesta:**
+
 ```json
 {
   "session_id": 1,
@@ -31,16 +37,21 @@ GET /v1/roulette/session/{session_id}/hash
 ```
 
 ### 3. Girar la Ruleta
+
 ```
 POST /v1/roulette/session/{session_id}/spin
 ```
+
 **Request:**
+
 ```json
 {
   "client_seed": "miSemilla123"
 }
 ```
+
 **Respuesta:**
+
 ```json
 {
   "session_id": 1,
@@ -53,10 +64,13 @@ POST /v1/roulette/session/{session_id}/spin
 ```
 
 ### 4. Realizar Apuesta
+
 ```
 POST /v1/roulette/session/{session_id}/bet
 ```
+
 **Request:**
+
 ```json
 {
   "client_seed": "miSemilla123",
@@ -93,28 +107,33 @@ Nuevos campos agregados al `RouletteWrapperState`:
 
 ```typescript
 {
-  sessionId: number | null;          // ID de la sesión activa
-  serverSeedHash: string | null;     // Hash del servidor
-  clientSeed: string;                // Semilla del cliente (auto-generada)
-  isSpinning: boolean;               // Estado de giro
+  sessionId: number | null; // ID de la sesión activa
+  serverSeedHash: string | null; // Hash del servidor
+  clientSeed: string; // Semilla del cliente (auto-generada)
+  isSpinning: boolean; // Estado de giro
 }
 ```
 
 ## Funciones Principales
 
 ### `initializeSession()`
+
 Crea una nueva sesión de ruleta al iniciar el componente.
 
 ### `handleSpin()`
+
 Realiza el giro de la ruleta y actualiza el estado con el resultado.
 
 ### `placeBet()`
+
 Envía todas las apuestas colocadas al backend y luego ejecuta el giro.
 
 ### `generateClientSeed()`
+
 Genera una semilla de cliente aleatoria para cada giro.
 
 ### `getBetTypeFromItem(item: Item)`
+
 Convierte el tipo de apuesta del frontend al formato esperado por el backend.
 
 ## Notas Importantes

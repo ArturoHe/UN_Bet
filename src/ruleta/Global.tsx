@@ -1,5 +1,3 @@
-
-
 export enum ValueType {
   NUMBER,
   NUMBERS_1_12,
@@ -14,16 +12,14 @@ export enum ValueType {
   DOUBLE_SPLIT,
   QUAD_SPLIT,
   TRIPLE_SPLIT,
-  EMPTY
+  EMPTY,
 }
-
 
 export interface Item {
   type: ValueType;
   value: number;
   valueSplit: number[];
 }
-
 
 export interface PlacedChip {
   item: Item;
@@ -36,7 +32,7 @@ export type RouletteWrapperState = {
   rouletteData: rouletteData;
   number: WheelNumber;
   chipsData: ChipsData;
-  winners: Winner[],
+  winners: Winner[];
   username: string;
   endTime: number;
   progressCountdown: number;
@@ -51,7 +47,7 @@ export type RouletteWrapperState = {
 export type Winner = {
   username: string;
   sum: number;
-}
+};
 export type ChipsData = {
   selectedChip: any;
   placedChips: any;
@@ -65,12 +61,12 @@ export enum GameStages {
   PLACE_BET,
   NO_MORE_BETS,
   WINNERS,
-  NONE
+  NONE,
 }
 export type GameData = {
-  stage: GameStages,
+  stage: GameStages;
   time_remaining: number;
   value: number;
-  wins: Winner[],
-  history: number[]
-}
+  wins: Winner[];
+  history: number[];
+};

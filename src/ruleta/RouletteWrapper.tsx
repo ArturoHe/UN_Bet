@@ -74,8 +74,10 @@ class RouletteWrapper extends React.Component<any, any> {
 
   // Generar una semilla de cliente aleatoria
   generateClientSeed(): string {
-    return Math.random().toString(36).substring(2, 15) + 
-           Math.random().toString(36).substring(2, 15);
+    return (
+      Math.random().toString(36).substring(2, 15) +
+      Math.random().toString(36).substring(2, 15)
+    );
   }
 
   // Inicializar sesión de ruleta
@@ -108,7 +110,10 @@ class RouletteWrapper extends React.Component<any, any> {
       );
 
       // Actualizar el historial
-      const newHistory = [spinResult.pocket, ...this.state.history].slice(0, 10);
+      const newHistory = [spinResult.pocket, ...this.state.history].slice(
+        0,
+        10
+      );
 
       // Actualizar el estado con el resultado
       this.setState({
@@ -125,7 +130,6 @@ class RouletteWrapper extends React.Component<any, any> {
       setTimeout(() => {
         this.setState({ stage: GameStages.PLACE_BET });
       }, 5000);
-
     } catch (error) {
       console.error("Error al girar la ruleta:", error);
       this.setState({ isSpinning: false, stage: GameStages.PLACE_BET });
@@ -242,30 +246,74 @@ class RouletteWrapper extends React.Component<any, any> {
   }
 
   // Convertir el tipo de apuesta del frontend al formato del backend
-  getBetTypeFromItem(item: Item): string {
+  getBetFromItem(item: Item, amount: number): any {
     switch (item.type) {
       case ValueType.NUMBER:
-        return `number_${item.value}`;
+        return {
+          type: "straight",
+          number: item.value,
+          amount: amount,
+        };
       case ValueType.RED:
-        return "red";
+        return {
+          type: "color",
+          side: "red" as const,
+          amount: amount,
+        };
       case ValueType.BLACK:
-        return "black";
+        return {
+          type: "color",
+          side: "black" as const,
+          amount: amount,
+        };
       case ValueType.EVEN:
-        return "even";
+        return {
+          type: "odd_even",
+          side: "even" as const,
+          amount: amount,
+        };
       case ValueType.ODD:
-        return "odd";
+        return {
+          type: "odd_even",
+          side: "odd" as const,
+          amount: amount,
+        };
       case ValueType.NUMBERS_1_18:
-        return "1-18";
+        return {
+          type: "low_high",
+          side: "low" as const,
+          amount: amount,
+        };
       case ValueType.NUMBERS_19_36:
-        return "19-36";
+        return {
+          type: "low_high",
+          side: "high" as const,
+          amount: amount,
+        };
       case ValueType.NUMBERS_1_12:
-        return "1st_12";
+        return {
+          type: "dozen",
+          which: 1 as const,
+          amount: amount,
+        };
       case ValueType.NUMBERS_2_12:
-        return "2nd_12";
+        return {
+          type: "dozen",
+          which: 2 as const,
+          amount: amount,
+        };
       case ValueType.NUMBERS_3_12:
-        return "3rd_12";
+        return {
+          type: "dozen",
+          which: 3 as const,
+          amount: amount,
+        };
       default:
-        return "unknown";
+        return {
+          type: "straight",
+          number: 0,
+          amount: amount,
+        };
     }
   }
 
@@ -276,41 +324,72 @@ class RouletteWrapper extends React.Component<any, any> {
     }
 
     var placedChipsMap = this.state.chipsData.placedChips;
-    
+
     if (placedChipsMap.size === 0) {
       console.warn("No hay apuestas para realizar");
       return;
     }
 
+    console.log("=== INICIO DE APUESTAS ===");
+    console.log("Total de apuestas a enviar:", placedChipsMap.size);
+
     try {
       // Procesar cada apuesta
+      let apuestaNumero = 1;
       for (let key of Array.from(placedChipsMap.keys())) {
         var chipsPlaced = placedChipsMap.get(key) as PlacedChip;
-        
+
         const betRequest = {
           client_seed: this.state.clientSeed,
-          bet: {
-            type: this.getBetTypeFromItem(chipsPlaced.item),
-            amount: chipsPlaced.sum,
-          },
+          bet: this.getBetFromItem(chipsPlaced.item, chipsPlaced.sum),
         };
 
-        console.log("Enviando apuesta:", betRequest);
-        
+        console.log(`Apuesta #${apuestaNumero}:`, betRequest);
+
+        this.setState({ isSpinning: true, stage: GameStages.NO_MORE_BETS });
+
         const betResponse = await rouletteApi.placeBet(
           this.state.sessionId,
           betRequest
         );
 
-        console.log("Respuesta de apuesta:", betResponse);
+        console.log(`Respuesta apuesta #${apuestaNumero}:`, betResponse);
+        
+        // El backend ya devuelve el resultado del giro en la respuesta
+        if (betResponse.spin) {
+          const spinResult = betResponse.spin;
+          
+          // Actualizar el historial
+          const newHistory = [spinResult.pocket, ...this.state.history].slice(0, 10);
+
+          // Actualizar el estado con el resultado
+          this.setState({
+            number: { next: spinResult.pocket.toString() },
+            history: newHistory,
+            isSpinning: false,
+            stage: GameStages.WINNERS,
+            clientSeed: this.generateClientSeed(), // Nueva semilla para el próximo giro
+          });
+
+          console.log("Resultado del giro (desde apuesta):", spinResult);
+
+          // Después de 5 segundos, volver a la etapa de apuestas
+          setTimeout(() => {
+            this.setState({ stage: GameStages.PLACE_BET });
+          }, 5000);
+        }
+        
+        apuestaNumero++;
       }
 
-      // Después de realizar todas las apuestas, girar la ruleta
-      await this.handleSpin();
+      console.log("=== FIN DE APUESTAS ===");
 
+      // NO llamar a handleSpin() porque el backend ya devuelve el resultado
+      // await this.handleSpin();
     } catch (error) {
       console.error("Error al realizar la apuesta:", error);
       alert("Error al realizar la apuesta. Por favor, intenta de nuevo.");
+      this.setState({ isSpinning: false, stage: GameStages.PLACE_BET });
     }
   }
 
@@ -448,7 +527,7 @@ class RouletteWrapper extends React.Component<any, any> {
             <li>
               <Button
                 disabled={
-                  this.state.stage !== GameStages.PLACE_BET || 
+                  this.state.stage !== GameStages.PLACE_BET ||
                   this.state.isSpinning ||
                   this.state.chipsData.placedChips.size === 0
                 }
@@ -465,7 +544,13 @@ class RouletteWrapper extends React.Component<any, any> {
                 {this.state.sessionId ? (
                   <>
                     <div>Session: {this.state.sessionId}</div>
-                    <div style={{ fontSize: "10px", wordBreak: "break-all", maxWidth: "200px" }}>
+                    <div
+                      style={{
+                        fontSize: "10px",
+                        wordBreak: "break-all",
+                        maxWidth: "200px",
+                      }}
+                    >
                       Seed: {this.state.clientSeed.substring(0, 20)}...
                     </div>
                   </>

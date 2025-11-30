@@ -42,7 +42,8 @@ export default function RouletteExample() {
       const betResponse = await rouletteApi.placeBet(sessionId, {
         client_seed: clientSeed,
         bet: {
-          type: "red", // Apostar al rojo
+          type: "color",
+          side: "red", // Apostar al rojo
           amount: 10,
         },
       });
@@ -107,7 +108,9 @@ export default function RouletteExample() {
       </div>
 
       {lastResult && (
-        <div style={{ marginTop: "20px", padding: "10px", background: "#f0f0f0" }}>
+        <div
+          style={{ marginTop: "20px", padding: "10px", background: "#f0f0f0" }}
+        >
           <h3>Último Resultado:</h3>
           <p>Número: {lastResult.pocket}</p>
           <p>Color: {lastResult.color}</p>

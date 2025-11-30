@@ -24,18 +24,27 @@ export interface RouletteSpinResponse {
   server_seed_hash: string;
 }
 
+// Tipos de apuesta según el backend
+export type Bet =
+  | { type: "straight"; number: number; amount: number }
+  | { type: "color"; side: "red" | "black"; amount: number }
+  | { type: "odd_even"; side: "odd" | "even"; amount: number }
+  | { type: "low_high"; side: "low" | "high"; amount: number }
+  | { type: "dozen"; which: 1 | 2 | 3; amount: number }
+  | { type: "column"; which: 1 | 2 | 3; amount: number };
+
 export interface RouletteBetRequest {
   client_seed: string;
-  bet: {
-    type: string; // "red", "black", "number", "odd", "even", etc.
-    amount: number;
-  };
+  bet: Bet;
 }
 
 export interface RouletteBetResponse {
-  success: boolean;
+  success?: boolean;
   message?: string;
   balance?: number;
+  spin?: RouletteSpinResponse;
+  bet_result?: any;
+  user?: any;
 }
 
 // Funciones de la API
@@ -79,9 +88,15 @@ export const rouletteApi = {
     sessionId: number,
     betData: RouletteBetRequest
   ): Promise<RouletteBetResponse> => {
+    const token = sessionStorage.getItem("jwtToken");
     const response = await api.post<RouletteBetResponse>(
       `/v1/roulette/session/${sessionId}/bet`,
-      betData
+      betData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     return response.data;
   },
