@@ -372,9 +372,13 @@ class RouletteWrapper extends React.Component<any, any> {
     console.log("Monto total a apostar:", totalBetAmount);
     console.log("Saldo actual:", this.state.userBalance);
 
+    this.setState({ isSpinning: true, stage: GameStages.NO_MORE_BETS });
+
     try {
-      // Procesar cada apuesta
+      // Procesar cada apuesta (sin girar todavía)
       let apuestaNumero = 1;
+      const allBetResponses = [];
+
       for (let key of Array.from(placedChipsMap.keys())) {
         var chipsPlaced = placedChipsMap.get(key) as PlacedChip;
 
@@ -386,14 +390,13 @@ class RouletteWrapper extends React.Component<any, any> {
         console.log(`Apuesta #${apuestaNumero}:`, betRequest);
         console.log(`Monto a apostar: ${chipsPlaced.sum}`);
 
-        this.setState({ isSpinning: true, stage: GameStages.NO_MORE_BETS });
-
         const betResponse = await rouletteApi.placeBet(
           this.state.sessionId,
           betRequest
         );
 
         console.log(`Respuesta apuesta #${apuestaNumero}:`, betResponse);
+        allBetResponses.push(betResponse);
 
         // Verificar el balance del usuario
         if (betResponse.user) {
@@ -409,40 +412,47 @@ class RouletteWrapper extends React.Component<any, any> {
           console.log("Ganancia/Pérdida:", betResponse.bet_result.payout || 0);
         }
 
-        // El backend ya devuelve el resultado del giro en la respuesta
-        if (betResponse.spin) {
-          const spinResult = betResponse.spin;
+        apuestaNumero++;
+      }
 
+      console.log("=== FIN DE APUESTAS ===");
+
+      // Usar el resultado del giro de la primera apuesta (todas tienen el mismo resultado)
+      if (allBetResponses.length > 0 && allBetResponses[0].spin) {
+        const spinResult = allBetResponses[0].spin;
+
+        console.log("Resultado del giro único:", spinResult);
+
+        // Iniciar animación de la ruleta
+        this.setState({
+          number: { next: spinResult.pocket.toString() },
+          isSpinning: false,
+          stage: GameStages.NO_MORE_BETS,
+        });
+
+        // Después de 5 segundos (cuando termina la animación), actualizar todo
+        setTimeout(async () => {
           // Actualizar el historial
           const newHistory = [spinResult.pocket, ...this.state.history].slice(
             0,
             10
           );
 
-          // Actualizar el estado con el resultado
           this.setState({
-            number: { next: spinResult.pocket.toString() },
             history: newHistory,
-            isSpinning: false,
             stage: GameStages.WINNERS,
             clientSeed: this.generateClientSeed(), // Nueva semilla para el próximo giro
           });
 
-          console.log("Resultado del giro (desde apuesta):", spinResult);
-
           // Actualizar el saldo después de la apuesta
           await this.fetchBalance();
 
-          // Después de 5 segundos, volver a la etapa de apuestas
+          // Después de 3 segundos más, volver a la etapa de apuestas
           setTimeout(() => {
             this.setState({ stage: GameStages.PLACE_BET });
-          }, 5000);
-        }
-
-        apuestaNumero++;
+          }, 3000);
+        }, 5000);
       }
-
-      console.log("=== FIN DE APUESTAS ===");
 
       // NO llamar a handleSpin() porque el backend ya devuelve el resultado
       // await this.handleSpin();
@@ -467,18 +477,6 @@ class RouletteWrapper extends React.Component<any, any> {
           <table className={"rouletteWheelWrapper"}>
             <tbody>
               <tr>
-                <td className={"winnersBoard"}>
-                  <div className={"winnerItemHeader hideElementsTest"}>
-                    WINNERS
-                  </div>
-                  {this.state.winners.map((entry, index) => {
-                    return (
-                      <div className="winnerItem" key={`winner-${index}`}>
-                        {index + 1}. {entry.username} won {entry.sum}$
-                      </div>
-                    );
-                  })}
-                </td>
                 <td>
                   <Wheel
                     rouletteData={this.state.rouletteData}
