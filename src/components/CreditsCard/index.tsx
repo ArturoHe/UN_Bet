@@ -42,6 +42,16 @@ export default function CreditsCard() {
       console.log("Solicitud de créditos:", credits);
       console.log("Token:", token);
 
+      await api.post(
+        "/v1/admin/credits",
+        { amount: credits, note: "Solicitud de créditos desde la aplicación" },
+        {
+          headers: {
+            Authorization: `bearer ${token}`,
+          },
+        }
+      );
+
       alert("Solicitud enviada con éxito");
       window.location.reload();
     } catch (error) {
