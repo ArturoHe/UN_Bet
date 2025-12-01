@@ -1,25 +1,25 @@
 import styles from "./style.module.css";
 
 type Props = {
-  username: string;
-  currentBalance: number;
-  requested: number;
+  user_id: number;
+  amount: number;
+  note: string;
   onApprove: () => void;
   onDeny: () => void;
 };
 
 export default function CreditRequestRow({
-  username,
-  currentBalance,
-  requested,
+  user_id,
+  amount,
+  note,
   onApprove,
   onDeny,
 }: Props) {
   return (
     <div className={styles.row}>
-      <p>{username}</p>
-      <p>${currentBalance}</p>
-      <p>${requested}</p>
+      <p>{user_id}</p>
+      <p>${amount}</p>
+      <p>${note}</p>
 
       <div className={styles.buttons}>
         <button className={styles.approve} onClick={onApprove}>
