@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import CreditRequestRow from "../../components/CreditRequestRow";
 import styles from "./style.module.css";
-import axios, { head } from "axios";
 import api from "../../api/axiosConfig";
 
 interface CreditRequest {
