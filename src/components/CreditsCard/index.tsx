@@ -42,16 +42,8 @@ export default function CreditsCard() {
       console.log("Solicitud de créditos:", credits);
       console.log("Token:", token);
 
-      /*const response = await api.post(
-        "/credits/request",
-        { amount: credits },
-        {
-          headers: {
-            Authorization: `${token}`,
-          },
-        }
-      );*/ alert("Solicitud enviada con éxito");
-      setCredits("");
+      alert("Solicitud enviada con éxito");
+      window.location.reload();
     } catch (error) {
       console.error("Error enviando solicitud:", error);
       alert("No se pudo enviar la solicitud");
