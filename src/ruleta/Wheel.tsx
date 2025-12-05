@@ -12,8 +12,7 @@ const Wheel = (props: {
   var lastNumber = 0;
 
   var rouletteWheelNumbers = props.rouletteData.numbers;
-  console.log(props.rouletteData);
-  console.log(props.number);
+
   const getRouletteIndexFromNumber = (number: string) => {
     return rouletteWheelNumbers.indexOf(parseInt(number));
   };

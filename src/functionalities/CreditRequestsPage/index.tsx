@@ -58,12 +58,10 @@ export default function CreditRequestsPage({}: Props) {
       })
       .then((res) => {
         setRequests(res.data);
-        console.log("Solicitudes obtenidas:", res.data);
       });
   }, []);
 
   const approveRequest = (id: number) => {
-    console.log("Aprobando solicitud id:", id);
     const token = sessionStorage.getItem("jwtToken");
 
     api.post(
@@ -73,11 +71,9 @@ export default function CreditRequestsPage({}: Props) {
         headers: { Authorization: `bearer ${token}` },
       }
     );
-    console.log("Aprobando solicitud id:", id);
   };
 
   const denyRequest = (id: number) => {
-    console.log("Denegando solicitud id:", id);
     const token = sessionStorage.getItem("jwtToken");
 
     api.post(
@@ -87,7 +83,6 @@ export default function CreditRequestsPage({}: Props) {
         headers: { Authorization: `bearer ${token}` },
       }
     );
-    console.log("Denegando solicitud id:", id);
   };
 
   return (

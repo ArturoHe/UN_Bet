@@ -1,5 +1,3 @@
-// GameCard.jsx
-//import React from "react";
 import type { MouseEventHandler } from "react";
 import styles from "./style.module.css";
 

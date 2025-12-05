@@ -23,9 +23,7 @@ function index({ image, title, description, price, id }: Props) {
       await api.post("/cart/remove", payload, {
         headers: { Authorization: token },
       });
-    } catch (error) {
-      console.log("Error deleting product:", error);
-    }
+    } catch (error) {}
     alert("Producto eliminado");
     window.location.reload();
   };

@@ -11,8 +11,6 @@ type Props = {
 function index({}: Props) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("rating", rating);
-    console.log("description", event.currentTarget.description.value);
     //window.location.reload();
   };
 
