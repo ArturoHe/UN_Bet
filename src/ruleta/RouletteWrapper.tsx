@@ -89,7 +89,6 @@ class RouletteWrapper extends React.Component<any, any> {
         sessionId: session.session_id,
         serverSeedHash: session.server_seed_hash,
       });
-      console.log("Sesión de ruleta creada:", session);
 
       // Obtener saldo inicial
       await this.fetchBalance();
@@ -103,7 +102,6 @@ class RouletteWrapper extends React.Component<any, any> {
     try {
       const balanceData = await rouletteApi.getBalance();
       this.setState({ userBalance: balanceData.saldo });
-      console.log("Saldo actualizado:", balanceData.saldo);
     } catch (error) {
       console.error("Error al obtener saldo:", error);
     }
@@ -139,8 +137,6 @@ class RouletteWrapper extends React.Component<any, any> {
         clientSeed: this.generateClientSeed(), // Nueva semilla para el próximo giro
       });
 
-      console.log("Resultado del giro:", spinResult);
-
       // Después de 5 segundos, volver a la etapa de apuestas
       setTimeout(() => {
         this.setState({ stage: GameStages.PLACE_BET });
@@ -152,17 +148,9 @@ class RouletteWrapper extends React.Component<any, any> {
   }
 
   async componentDidMount() {
-    console.log(
-      "🔵 RouletteWrapper montado - ID:",
-      Math.random().toString(36).substring(7)
-    );
     await this.initializeSession();
   }
-  componentWillUnmount() {
-    console.log("🔴 RouletteWrapper desmontado");
-    // TODO: Cerrar conexión de socket cuando esté inicializado
-    // this.socketServer.close();
-  }
+
   setGameData(gameData: GameData) {
     if (gameData.stage === GameStages.NO_MORE_BETS) {
       // PLACE BET from 25 to 35
@@ -209,7 +197,6 @@ class RouletteWrapper extends React.Component<any, any> {
   }
 
   onCellClick(item: Item) {
-    //console.log("----");
     var currentChips = this.state.chipsData.placedChips;
 
     var chipValue = this.state.chipsData.selectedChip;
@@ -220,13 +207,10 @@ class RouletteWrapper extends React.Component<any, any> {
     currentChip.item = item;
     currentChip.sum = chipValue;
 
-    console.log(this.state.chipsData.placedChips);
-    console.log(item);
     if (currentChips.get(item) !== undefined) {
       currentChip.sum += currentChips.get(item).sum;
     }
 
-    //console.log(currentChips[item]);
     currentChips.set(item, currentChip);
     this.setState({
       chipsData: {
@@ -337,8 +321,6 @@ class RouletteWrapper extends React.Component<any, any> {
   }
 
   async placeBet() {
-    console.log("🎯 placeBet() llamado - Timestamp:", Date.now());
-
     if (!this.state.sessionId || this.state.stage !== GameStages.PLACE_BET) {
       console.warn("No se puede apostar en este momento");
       return;
@@ -366,12 +348,6 @@ class RouletteWrapper extends React.Component<any, any> {
       return;
     }
 
-    console.log("=== INICIO DE APUESTAS ===");
-    console.log("SessionID actual:", this.state.sessionId);
-    console.log("Total de apuestas a enviar:", placedChipsMap.size);
-    console.log("Monto total a apostar:", totalBetAmount);
-    console.log("Saldo actual:", this.state.userBalance);
-
     this.setState({ isSpinning: true, stage: GameStages.NO_MORE_BETS });
 
     try {
@@ -387,41 +363,23 @@ class RouletteWrapper extends React.Component<any, any> {
           bet: this.getBetFromItem(chipsPlaced.item, chipsPlaced.sum),
         };
 
-        console.log(`Apuesta #${apuestaNumero}:`, betRequest);
-        console.log(`Monto a apostar: ${chipsPlaced.sum}`);
-
         const betResponse = await rouletteApi.placeBet(
           this.state.sessionId,
           betRequest
         );
 
-        console.log(`Respuesta apuesta #${apuestaNumero}:`, betResponse);
         allBetResponses.push(betResponse);
 
         // Verificar el balance del usuario
         if (betResponse.user) {
-          console.log(
-            "Balance del usuario después de apostar:",
-            betResponse.user.balance
-          );
-        }
-
-        // Verificar el resultado de la apuesta
-        if (betResponse.bet_result) {
-          console.log("Resultado de la apuesta:", betResponse.bet_result);
-          console.log("Ganancia/Pérdida:", betResponse.bet_result.payout || 0);
         }
 
         apuestaNumero++;
       }
 
-      console.log("=== FIN DE APUESTAS ===");
-
       // Usar el resultado del giro de la primera apuesta (todas tienen el mismo resultado)
       if (allBetResponses.length > 0 && allBetResponses[0].spin) {
         const spinResult = allBetResponses[0].spin;
-
-        console.log("Resultado del giro único:", spinResult);
 
         // Iniciar animación de la ruleta
         this.setState({

@@ -16,11 +16,7 @@ function UserProfileCard() {
         });
 
         setUser(response.data);
-
-        console.log("Datos de usuario obtenidos del backend:", response.data);
       } catch (error) {
-        console.log("ERROR en backend, usando datos temporales...");
-
         // -------- DATOS TEMPORALES PARA DESARROLLO --------
         setUser({
           nombre: "Ana",

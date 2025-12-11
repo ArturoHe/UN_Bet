@@ -12,9 +12,7 @@ type Props = {
 };
 
 function index({ image, title, description, price, date }: Props) {
-  const handleInfo = () => {
-    console.log("Info");
-  };
+  const handleInfo = () => {};
 
   return (
     <>

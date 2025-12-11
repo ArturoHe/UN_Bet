@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import CreditRequestRow from "../../components/CreditRequestRow";
 import styles from "./style.module.css";
+import api from "../../api/axiosConfig";
 
 interface CreditRequest {
   id: number;
-  username: string;
-  currentBalance: number;
-  requestedAmount: number;
+  user_id: number;
+  amount: number;
+  note: string;
 }
 
 type Props = {
@@ -23,59 +24,65 @@ export default function CreditRequestsPage({}: Props) {
     const mockData: CreditRequest[] = [
       {
         id: 1,
-        username: "anago2025",
-        currentBalance: 10500,
-        requestedAmount: 5000,
+        user_id: 1,
+        amount: 10500,
+        note: "5000",
       },
       {
         id: 2,
-        username: "arturo2025",
-        currentBalance: 1100,
-        requestedAmount: 100000,
+        user_id: 1,
+        amount: 10500,
+        note: "5000",
       },
       {
         id: 3,
-        username: "manuel2025",
-        currentBalance: 0,
-        requestedAmount: 8000,
+        user_id: 1,
+        amount: 10500,
+        note: "5000",
       },
       {
         id: 4,
-        username: "daniel2025",
-        currentBalance: 85000,
-        requestedAmount: 5500,
+        user_id: 1,
+        amount: 10500,
+        note: "5000",
       },
     ];
 
     setRequests(mockData);
 
-    /* 
-    TO-DO INSERTAR BACKEND REAL 
+    const token = sessionStorage.getItem("jwtToken");
 
-    api.get("/credits/requests").then((res) => {
-      setRequests(res.data);
-    });
-    */
+    api
+      .get<CreditRequest[]>("/v1/admin/credits", {
+        headers: { Authorization: `bearer ${token}` },
+      })
+      .then((res) => {
+        setRequests(res.data);
+      });
   }, []);
 
   const approveRequest = (id: number) => {
-    console.log("Aprobando solicitud id:", id);
+    const token = sessionStorage.getItem("jwtToken");
 
-    /*
-    api.post(`/credits/approve/${id}`).then(() => {
-      setRequests(prev => prev.filter(r => r.id !== id));
-    });
-    */
+    api.post(
+      `/v1/admin/credits/${id}/approve`,
+      {},
+      {
+        headers: { Authorization: `bearer ${token}` },
+      }
+    );
   };
 
   const denyRequest = (id: number) => {
-    console.log("Denegando solicitud id:", id);
+    const token = sessionStorage.getItem("jwtToken");
 
-    /*
-    api.post(`/credits/deny/${id}`).then(() => {
-      setRequests(prev => prev.filter(r => r.id !== id));
-    });
-    */
+    api.post(
+      `/v1/admin/credits/${id}/deny`,
+      {},
+      {
+        headers: { Authorization: `bearer ${token}` },
+      }
+    );
   };
 
   return (
@@ -93,9 +100,9 @@ export default function CreditRequestsPage({}: Props) {
         {requests.map((req) => (
           <CreditRequestRow
             key={req.id}
-            username={req.username}
-            currentBalance={req.currentBalance}
-            requested={req.requestedAmount}
+            user_id={req.user_id}
+            amount={req.amount}
+            note={req.note}
             onApprove={() => approveRequest(req.id)}
             onDeny={() => denyRequest(req.id)}
           />

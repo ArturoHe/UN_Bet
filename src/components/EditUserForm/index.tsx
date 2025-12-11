@@ -33,9 +33,7 @@ function EditUserForm() {
       });
 
       alert("Imagen de perfil actualizada");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleDelete = async () => {
@@ -47,9 +45,7 @@ function EditUserForm() {
       alert("Usuario eliminado");
       sessionStorage.clear();
       window.location.href = "/home";
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleSubmitPass = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -74,14 +70,11 @@ function EditUserForm() {
     try {
       await api.post("/update-password", payload);
       alert("Cambio de contraseña exitoso");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (
     <div className={styles.page}>
-
       {/* Título principal */}
       <h1 className={styles.mainTitle}>Editar Perfil</h1>
 

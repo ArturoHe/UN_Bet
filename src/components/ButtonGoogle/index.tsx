@@ -33,9 +33,7 @@ function Index({}: Props) {
               };
               sessionStorage.setItem("id", responseData.id);
               sessionStorage.setItem("username", responseData.username);
-            } catch (error) {
-              console.log("Error en la solicitud de datos:", error);
-            }
+            } catch (error) {}
 
             if (sessionStorage.getItem("redirectAfterLogin")) {
               window.location.href =
@@ -45,13 +43,9 @@ function Index({}: Props) {
             } else {
               window.location.href = "/home";
             }
-          } catch (error) {
-            console.log("Error en la solicitud:", error);
-          }
+          } catch (error) {}
         }}
-        onError={() => {
-          console.log("Login Failed");
-        }}
+        onError={() => {}}
       />
     </div>
   );

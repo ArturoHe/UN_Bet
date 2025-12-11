@@ -26,11 +26,9 @@ function RegisterForm({ onReturn }: Props) {
       cedula: formData.get("idNumber"),
       tipo_documento: "CC",
     };
-    console.log("payload", payload);
     try {
       const response = await api.post<LoginResponse>("/auth/signup", payload);
 
-      console.log("response", response);
       alert("Registro Exitoso");
       window.location.href = "/login";
 

@@ -19,8 +19,6 @@ export default function CreditsCard() {
       });
 
       setBalance(response.data.saldo);
-      console.log("Balance obtenido:", response.data.saldo);
-      console.log("Token usado:", token);
     } catch (error) {
       console.error("Error obteniendo balance:", error);
       alert("No se pudo obtener el saldo");
@@ -39,19 +37,19 @@ export default function CreditsCard() {
 
     try {
       const token = sessionStorage.getItem("jwtToken");
-      console.log("Solicitud de créditos:", credits);
-      console.log("Token:", token);
 
-      /*const response = await api.post(
-        "/credits/request",
-        { amount: credits },
+      await api.post(
+        "/v1/admin/credits",
+        { amount: credits, note: "Solicitud de créditos desde la aplicación" },
         {
           headers: {
-            Authorization: `${token}`,
+            Authorization: `bearer ${token}`,
           },
         }
-      );*/ alert("Solicitud enviada con éxito");
-      setCredits("");
+      );
+
+      alert("Solicitud enviada con éxito");
+      window.location.reload();
     } catch (error) {
       console.error("Error enviando solicitud:", error);
       alert("No se pudo enviar la solicitud");

@@ -19,7 +19,7 @@ function LandingPage({}: Props) {
     <>
       <div className={`container-fluid ${styles.LandingBackground}`}>
         <div className=" container-fluid row p-0 m-0">
-          <div className="col-6 ">
+          <div className="col-lg-6 ">
             <div className="ms-5 mt-5 pt-5">
               <div className="pt-5">
                 <h1
@@ -65,7 +65,7 @@ function LandingPage({}: Props) {
           </div>
 
           <div
-            className="col-6 justify-content-center d-flex align-items-center"
+            className="col-lg-6 mt-5 justify-content-center d-flex align-items-center d-none d-sm-block"
             style={{ height: "86vh" }}
           >
             <img src="ruleta.webp" alt="" width={"60%"} />
