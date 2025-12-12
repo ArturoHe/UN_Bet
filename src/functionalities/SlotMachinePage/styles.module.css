@@ -1,38 +1,169 @@
-/* styles.module.css (Opción A) */
+/* SlotMachinePage Styles */
 .page {
   min-height: calc(100vh - 5rem);
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 1) 60%,
+    rgba(0, 0, 0, 1) 40%,
     rgba(23, 0, 48, 1) 100%
   );
   display: flex;
-  align-items: center; /* centra verticalmente */
-  justify-content: center; /* centra horizontalmente */
+  align-items: center;
+  justify-content: center;
   padding: 2rem;
-  /* separación entre LeftPanel y content */
+  gap: 4rem;
   font-family: "Plus Jakarta Sans", sans-serif;
   box-sizing: border-box;
 }
 
-/* el contenedor central que agrupa el slot + betselector */
+/* Panel izquierdo */
+.leftPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 280px;
+}
+
+/* Contenedor central */
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* ajusta según necesites */
+  gap: 1rem;
+  max-width: 800px;
 }
 
-/* quitamos la posicion absoluta y lo dejamos centrado en el flujo */
+/* Popup de ganancia */
+.winPopupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.winPopup {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 3px solid #4caf50;
+  border-radius: 20px;
+  padding: 2rem 3rem;
+  text-align: center;
+  box-shadow: 
+    0 0 40px rgba(76, 175, 80, 0.5),
+    0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.winPopupTitle {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.winPopupAmount {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #4caf50;
+  text-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+  margin-bottom: 1rem;
+}
+
+.winPopupEmoji {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.winPopupButton {
+  background: linear-gradient(135deg, #4caf50, #8bc34a);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.winPopupButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4);
+}
+
+/* Área del slot machine */
 .centerArea {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  width: 80%;
+  width: 100%;
   box-sizing: border-box;
 }
 
-/* responsive: apilar cuando sea muy chico */
+/* Info de apuesta */
+.betInfo {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.6rem 1.5rem;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  margin-right: 6rem;
+}
+
+.betInfo strong {
+  color: #d4af37;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .page {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    gap: 2rem;
+  }
+
+  .leftPanel {
+    min-width: auto;
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 600px) {
+  .lastWinBanner {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .betInfo {
+    font-size: 0.9rem;
+  }
+}
