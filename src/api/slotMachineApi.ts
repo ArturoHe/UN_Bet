@@ -66,7 +66,9 @@ export const slotMachineApi = {
   /**
    * Obtener el hash de la sesión
    */
-  getSessionHash: async (sessionId: number): Promise<SlotMachineSessionHash> => {
+  getSessionHash: async (
+    sessionId: number
+  ): Promise<SlotMachineSessionHash> => {
     const response = await api.get<SlotMachineSessionHash>(
       `/v1/slots/session/${sessionId}/hash`
     );
@@ -83,9 +85,9 @@ export const slotMachineApi = {
   ): Promise<SlotMachineSpinResponse> => {
     const response = await api.post<SlotMachineSpinResponse>(
       `/v1/slots/session/${sessionId}/spin`,
-      { 
+      {
         client_seed: clientSeed,
-        bet_amount: betAmount
+        bet_amount: betAmount,
       }
     );
     return response.data;
@@ -108,6 +110,7 @@ export const slotMachineApi = {
         },
       }
     );
+
     return response.data;
   },
 
