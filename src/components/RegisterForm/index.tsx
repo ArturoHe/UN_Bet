@@ -1,7 +1,7 @@
 import React from "react";
 import ButtonAction from "../ButtonAction";
 import styles from "./style.module.css";
-import { authResponse, LoginResponse } from "../../api/types";
+import { LoginResponse } from "../../api/types";
 import api from "../../api/axiosConfig";
 
 type Props = {
