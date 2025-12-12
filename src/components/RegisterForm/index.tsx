@@ -33,25 +33,7 @@ function RegisterForm({ onReturn }: Props) {
       window.location.href = "/login";
 
       const token = response.data.access_token;
-
-      const responseId = await api.get<authResponse>("/perfil", {
-        headers: {
-          Authorization: `${token}`,
-        },
-      });
-
-      const idUser = responseId.data.id;
-      const username = responseId.data.username;
-
-      if (token) {
-        sessionStorage.setItem("jwtToken", token);
-        sessionStorage.setItem("username", username);
-        sessionStorage.setItem("id", idUser);
-
-        window.location.href = "/home";
-      } else {
-        alert("No se recibió un token");
-      }
+      console.log("Token de acceso:", token);
     } catch (error) {
       console.error("Error en el Registro", error);
       alert("Error en el Registro");
