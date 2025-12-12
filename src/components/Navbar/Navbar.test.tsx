@@ -53,7 +53,7 @@ describe('Navbar Component', () => {
     render(<Navbar />);
     
     const links = screen.queryAllByRole('link');
-    const ingresoLink = links.find(link => link.textContent.includes('Ingresar'));
+    const ingresoLink = links.find(link => link.textContent?.includes('Ingresar'));
     expect(ingresoLink).toBeUndefined();
   });
 });

@@ -1,5 +1,5 @@
-import { render, RenderOptions } from '@testing-library/react';
-import React, { ReactElement } from 'react';
+import { render, RenderOptions } from "@testing-library/react";
+import { ReactElement } from "react";
 
 /**
  * Custom render function that wraps components with common providers
@@ -7,8 +7,8 @@ import React, { ReactElement } from 'react';
  */
 const customRender = (
   ui: ReactElement,
-  options?: Omit<RenderOptions, 'wrapper'>
+  options?: Omit<RenderOptions, "wrapper">
 ) => render(ui, { ...options });
 
-export * from '@testing-library/react';
+export * from "@testing-library/react";
 export { customRender as render };
