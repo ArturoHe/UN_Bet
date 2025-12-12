@@ -8,11 +8,7 @@ const ProgressBarRound = (props: {
   currentDuration: number;
 }): JSX.Element => {
   useEffect(() => {
-    console.log("stage : " + props.stage);
-    console.log("maxDuration : " + props.maxDuration);
-    console.log("currentDuration : " + props.currentDuration);
     var duration = (props.maxDuration - props.currentDuration) * 1000;
-    console.log(duration);
     anime({
       targets: "progress",
       value: [0, 100],

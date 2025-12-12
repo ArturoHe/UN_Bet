@@ -14,8 +14,6 @@ function ChipComponent(props: {
   colSpan: number | undefined;
   onCellClick: (arg0: any) => void;
 }) {
-  console.log("Child Render");
-
   var currentItemChips = props.currentItemChips;
   var tdKey = props.tdKey;
   var cellClass = props.cellClass;
@@ -51,7 +49,6 @@ function ChipComponent(props: {
       rowSpan={props.rowSpan}
       colSpan={props.colSpan}
       onClick={() => {
-        console.log("click");
         props.onCellClick(cell);
       }}
     >

@@ -11,6 +11,11 @@ const LogBackground = () => {
           </div>
         </div>
 
+        <div className={"d-block d-sm-none"}>
+          <div className="p-3 mt-5">
+            <Card />
+          </div>
+        </div>
         <div className={"col col-lg-6 p-0 d-none d-lg-block"}>
           <div className="d-flex justify-content-center align-items-center h-100">
             <div className="m-5">

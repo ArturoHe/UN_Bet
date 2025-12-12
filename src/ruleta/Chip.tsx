@@ -13,7 +13,6 @@ let Chip = function (props: {
   function randomNumber(min: number, max: number) {
     return Math.random() * (max - min) + min;
   }
-  //console.log(chipsData);
   function getChipClasses(chip: number) {
     var cellClass = classNames({
       "chip-100-placed": chip === 100,
@@ -81,7 +80,6 @@ let Chip = function (props: {
           currentChip +
           "_" +
           i;
-        //console.log(key);
         let style = {
           top: "0px",
           left: "0px",

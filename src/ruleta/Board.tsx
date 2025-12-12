@@ -194,7 +194,6 @@ class Board extends React.Component<any, any> {
       }
       colList.push(rowList);
     }
-    console.log(colList);
     return colList;
   }
 
@@ -238,7 +237,6 @@ class Board extends React.Component<any, any> {
             <table>
               <tbody>
                 {this.numbers.map((item, index) => {
-                  console.log(this.numbers);
                   var keyId = 0;
                   return (
                     <tr key={"tr_board_" + index}>
