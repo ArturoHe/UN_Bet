@@ -40,7 +40,7 @@ function UserProfileCard() {
   if (!user) return <p>Cargando...</p>;
 
   const handleEdit = () => {
-    window.location.href = "/userconfig";
+    window.location.href = "/editprofile";
   };
 
   return (

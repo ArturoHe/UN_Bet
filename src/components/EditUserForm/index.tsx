@@ -55,6 +55,7 @@ function EditUserForm() {
     const verify = {
       password: formData.get("password"),
       password2: formData.get("password2"),
+      passwordOld: formData.get("passwordOld"),
     };
 
     if (verify.password !== verify.password2) {
@@ -62,15 +63,25 @@ function EditUserForm() {
       return;
     }
 
+    const token = sessionStorage.getItem("jwtToken");
+
     const payload = {
-      token: sessionStorage.getItem("jwtToken"),
-      newPassword: verify.password,
+      old_password: verify.passwordOld,
+      new_password: verify.password,
     };
 
     try {
-      await api.post("/update-password", payload);
+      await api.patch("/profile/me/password", payload, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
       alert("Cambio de contraseña exitoso");
-    } catch (error) {}
+    } catch (error) {
+      console.log(payload);
+      alert(error);
+    }
   };
 
   return (
@@ -82,6 +93,14 @@ function EditUserForm() {
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>Cambiar contraseña</h2>
         <form onSubmit={handleSubmitPass} className={styles.form}>
+          <input
+            required
+            name="passwordOld"
+            type="password"
+            className={styles.input}
+            placeholder="Contraseña Actual"
+          />
+
           <input
             required
             name="password"
@@ -115,7 +134,7 @@ function EditUserForm() {
             className={styles.fileInput}
           />
 
-          <ButtonAction text="Cambiar" type="submit" />
+          <ButtonAction text="Cambiar" type="submit" disabled={true} />
         </form>
       </section>
 
